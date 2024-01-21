@@ -1,0 +1,37 @@
+@startuml Desk Controller v0.0.1
+
+title Desk Controller v0.0.1
+
+node "Desk Controller" {
+	node "UI" {
+		[System Monitor]
+	}
+
+	node "Backend" {
+		[Config Reader Service]
+		[System Monitor Server]
+	}
+	
+	[System Monitor] --> [System Monitor Server]
+	[System Monitor Server] --> Socket
+}
+
+node "Monitored PC" {
+	node "System Monitor Client app" {
+		Socket <-- [System Monitor Client]
+	}
+}
+
+folder "\~/.desk-controller" {
+	[Config]
+
+	note top of Config
+		Data about monitored PCs
+	end note
+
+}
+
+[Config Reader Service] --> [Config]
+
+@enduml 
+
