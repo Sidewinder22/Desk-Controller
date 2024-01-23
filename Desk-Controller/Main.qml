@@ -17,4 +17,6 @@ ApplicationWindow {
             verticalCenter: parent.verticalCenter
         }
     }
+
+    SideBar { }
 }
