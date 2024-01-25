@@ -20,7 +20,7 @@ Item {
             anchors.left: parent.left
 
             onClicked: {
-            welcomeLabel.text = "Hello"
+                moduleWindowLoader.source = "SystemMonitor.qml"
             }
         }
 
@@ -28,12 +28,12 @@ Item {
             id: label2
             width: label1.width
             height: 50
-            text: "Anoter Label"
+            text: "Module"
             anchors.top: label1.bottom
             anchors.left: parent.left
 
             onClicked: {
-            welcomeLabel.text = "Hello, another content label"
+                moduleWindowLoader.source = "Module.qml"
             }
         }
     }

@@ -8,13 +8,17 @@ ApplicationWindow {
     visible: true
     title: qsTr("Hello World")
 
-    Label {
-        id: welcomeLabel
-        text: "Hello world!"
+    Loader {
+        id: moduleWindowLoader
+        source: "SystemMonitor.qml"
+    }
 
-        anchors {
-            horizontalCenter: parent.horizontalCenter
-            verticalCenter: parent.verticalCenter
+    Connections {
+        id: mainConnections
+        target: moduleWindowLoader.item
+
+        function onMessage(msg) {
+            console.log(msg)
         }
     }
 
