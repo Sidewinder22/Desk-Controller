@@ -5,8 +5,6 @@ Item {
 
     Drawer {
         id: drawer
-        width: 0.66 * window.width
-        height: window.height
 
         // visible at the startup
         visible: true
@@ -14,9 +12,23 @@ Item {
         Button {
             id: label1
             height: 50
+            width: label2.width
+
+            text: "Setup"
+            anchors.top: parent.top
+            anchors.left: parent.left
+
+            onClicked: {
+                moduleWindowLoader.source = "Setup.qml"
+            }
+        }
+
+        Button {
+            id: label2
+            height: 50
 
             text: "System Monitor"
-            anchors.top: parent.top
+            anchors.top: label1.bottom
             anchors.left: parent.left
 
             onClicked: {
@@ -25,11 +37,12 @@ Item {
         }
 
         Button {
-            id: label2
-            width: label1.width
+            id: label3
+            width: label2.width
             height: 50
+
             text: "Module"
-            anchors.top: label1.bottom
+            anchors.top: label2.bottom
             anchors.left: parent.left
 
             onClicked: {
@@ -37,5 +50,4 @@ Item {
             }
         }
     }
-
 }
