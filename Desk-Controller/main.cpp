@@ -18,13 +18,14 @@ int main(int argc, char *argv[])
     Backend *backend = new Backend(&app);
     engine.rootContext()->setContextProperty("backend", backend);
 
+    const QUrl url(u"qrc:/Desk-Controller/main.qml"_qs);
     QObject::connect(
         &engine,
         &QQmlApplicationEngine::objectCreationFailed,
         &app,
         []() { QCoreApplication::exit(-1); },
         Qt::QueuedConnection);
-    engine.loadFromModule("Desk-Controller", "Main");
+    engine.load(url);
 
     return app.exec();
 }
