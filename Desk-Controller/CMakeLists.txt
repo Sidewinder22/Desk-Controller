@@ -4,10 +4,10 @@ project(Desk-Controller VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt6 6.5 REQUIRED COMPONENTS Quick)
-find_package(Qt6 6.5 REQUIRED COMPONENTS QuickControls2)
+find_package(Qt6 6.4 REQUIRED COMPONENTS Quick)
+find_package(Qt6 6.4 REQUIRED COMPONENTS QuickControls2)
 
-qt_standard_project_setup(REQUIRES 6.5)
+qt_standard_project_setup(REQUIRES 6.4)
 
 qt_add_executable(appDesk-Controller
     main.cpp
@@ -16,7 +16,7 @@ qt_add_executable(appDesk-Controller
 qt_add_qml_module(appDesk-Controller
     URI Desk-Controller
     VERSION 1.0
-    QML_FILES Main.qml
+    QML_FILES main.qml
     QML_FILES SideBar.qml
     QML_FILES SystemMonitorModule.qml
     QML_FILES Module.qml
