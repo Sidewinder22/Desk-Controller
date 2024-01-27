@@ -4,7 +4,7 @@ project(Desk-Controller VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt6 6.5 REQUIRED COMPONENTS Quick)
+find_package(Qt6 6.5 REQUIRED COMPONENTS Quick QuickControls2)
 
 qt_standard_project_setup(REQUIRES 6.5)
 
@@ -19,6 +19,7 @@ qt_add_qml_module(appDesk-Controller
     QML_FILES SideBar.qml
     QML_FILES SystemMonitor.qml
     QML_FILES Module.qml
+    QML_FILES Setup.qml
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
@@ -32,8 +33,9 @@ set_target_properties(appDesk-Controller PROPERTIES
     WIN32_EXECUTABLE TRUE
 )
 
-target_link_libraries(appDesk-Controller
-    PRIVATE Qt6::Quick
+target_link_libraries(appDesk-Controller PRIVATE
+    Qt6::Quick
+    Qt6::QuickControls2
 )
 
 include(GNUInstallDirs)

@@ -3,23 +3,19 @@ import QtQuick.Controls
 
 ApplicationWindow {
     id: root
-    width: 640
-    height: 480
+    width: 900
+    height: 600
     visible: true
-    title: qsTr("Hello World")
+    title: qsTr("Desk Controller")
 
     Loader {
         id: moduleWindowLoader
-        source: "SystemMonitor.qml"
+        source: "Setup.qml"
     }
 
     Connections {
         id: mainConnections
         target: moduleWindowLoader.item
-
-        function onMessage(msg) {
-            console.log(msg)
-        }
     }
 
     SideBar { }
