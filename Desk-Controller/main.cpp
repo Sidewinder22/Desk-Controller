@@ -1,6 +1,8 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQuickStyle>
+#include <QQmlContext>
+#include "Application.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -12,6 +14,10 @@ int main(int argc, char *argv[])
     // QQuickStyle::setStyle("Imagine");
 
     QQmlApplicationEngine engine;
+
+    Application *application = new Application(&app);
+    engine.rootContext()->setContextProperty("application", application);
+
     QObject::connect(
         &engine,
         &QQmlApplicationEngine::objectCreationFailed,

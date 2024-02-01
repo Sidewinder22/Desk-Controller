@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import QtQuick.Dialogs
 
 Item {
     width: 640
@@ -26,7 +27,6 @@ Item {
 
                 onClicked: function() {
                     setupDialog.open()
-                    console.log("Clicked...")
                 }
             }
 
@@ -55,11 +55,8 @@ Item {
 
                         TextField {
                             id: ipTextField
+                            width: 200
                             placeholderText: "0.0.0.0"
-
-                            onEditingFinished: function() {
-                                console.log("IP address: ", ipTextField.text)
-                            }
                         }
                     }
 
@@ -76,17 +73,42 @@ Item {
 
                         TextField {
                             id: portTextField
+                            width: 200
                             placeholderText: "port number"
 
                             onEditingFinished: function() {
-                                console.log("Port number: ", portTextField.text)
+                                var port = parseInt(portTextField.text)
+                                if (port < 1024 || port > 65535)
+                                {
+                                    wrongPortMessageDialog.open()
+                                    return
+                                }
                             }
                         }
                     }
                 }
 
-                onAccepted: console.log("Ok")
+                onAccepted: function() {
+                    console.log("Ok")
+
+                    var port = parseInt(portTextField.text)
+                    if (port < 1024 || port > 65535)
+                    {
+                        wrongPortMessageDialog.open()
+                        return
+                    }
+
+                    application.ipAndPortDataReady(ipTextField.text, port)
+
+                }
                 onRejected: console.log("Cancel")
+            }
+
+            MessageDialog {
+                id: wrongPortMessageDialog
+                buttons: MessageDialog.Ok
+                text: "Not allowed port number!"
+                informativeText: "Port number should be greater than 1023 and lower than 65536"
             }
         }
     }
