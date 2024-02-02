@@ -6,7 +6,7 @@
 #define APPLICATION_HPP_
 
 #include <QObject>
-#include <iostream>
+#include "TcpClient.hpp"
 
 class Application : public QObject
 {
@@ -17,6 +17,9 @@ public:
 
 public slots:
     void ipAndPortDataReady(const QString &ip, const uint16_t &port);
+
+private:
+    TcpClient *tcpClient_;
 };
 
 #endif // APPLICATION_HPP_

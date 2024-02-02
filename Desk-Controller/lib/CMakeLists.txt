@@ -4,10 +4,12 @@ set(LIB backend)
 
 set(HEADERS
     include/Application.hpp
+    include/TcpClient.hpp
 )
 
 set(SOURCES
     src/Application.cpp
+    src/TcpClient.cpp
 )
 
 qt_add_library(${LIB} SHARED
