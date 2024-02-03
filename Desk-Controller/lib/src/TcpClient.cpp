@@ -24,6 +24,8 @@ void TcpClient::connected()
 
     const char *hello = "Hello from Desk-Controller!";
     tcpSocket_->write(hello, qstrlen(hello));
+
+    emit connectedToServer(tcpSocket_->peerAddress().toString(), tcpSocket_->peerPort());
 }
 
 void TcpClient::disconnected()

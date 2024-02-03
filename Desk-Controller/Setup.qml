@@ -18,6 +18,14 @@ Item {
         Item {
             anchors.centerIn: parent
 
+            Connections {
+                target: backend
+
+                function onServerConnected(ip, port) {
+                    console.log("Server connected: " + ip + ", port: " + port)
+                }
+            }
+
             Button {
                 id: newConnectionButton
                 height: 50
@@ -89,7 +97,7 @@ Item {
                 }
 
                 onAccepted: function() {
-                    console.log("Ok")
+                    console.log("Ok clicked")
 
                     var port = parseInt(portTextField.text)
                     if (port < 1024 || port > 65535)
@@ -98,7 +106,7 @@ Item {
                         return
                     }
 
-                    application.ipAndPortDataReady(ipTextField.text, port)
+                    backend.ipAndPortDataReady(ipTextField.text, port)
 
                 }
                 onRejected: console.log("Cancel")

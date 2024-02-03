@@ -2,7 +2,7 @@
 #include <QQmlApplicationEngine>
 #include <QQuickStyle>
 #include <QQmlContext>
-#include "Application.hpp"
+#include "Backend.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -15,8 +15,8 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-    Application *application = new Application(&app);
-    engine.rootContext()->setContextProperty("application", application);
+    Backend *backend = new Backend(&app);
+    engine.rootContext()->setContextProperty("backend", backend);
 
     QObject::connect(
         &engine,
