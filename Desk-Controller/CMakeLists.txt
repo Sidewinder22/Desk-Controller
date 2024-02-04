@@ -21,6 +21,8 @@ qt_add_qml_module(appDesk-Controller
     QML_FILES SystemMonitor.qml
     QML_FILES Module.qml
     QML_FILES Setup.qml
+    QML_FILES setup/NewConnectionDialog.qml
+    QML_FILES setup/DisplaySettings.qml
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
