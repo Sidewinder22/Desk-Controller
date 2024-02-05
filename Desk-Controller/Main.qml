@@ -8,15 +8,22 @@ ApplicationWindow {
     visible: true
     title: qsTr("Desk Controller")
 
-    Loader {
-        id: moduleWindowLoader
-        source: "Setup.qml"
-    }
-
-    Connections {
-        id: mainConnections
-        target: moduleWindowLoader.item
-    }
-
     SideBar { }
+
+    Setup {
+        id: setupModule
+        visible: true
+    }
+
+    SystemMonitor {
+        id: systemMonitorModule
+        visible: false
+        anchors.fill: parent
+    }
+
+    Module {
+        id: moduleModule
+        visible: false
+        anchors.fill: parent
+    }
 }
