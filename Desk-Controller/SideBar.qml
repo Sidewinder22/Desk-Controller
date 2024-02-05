@@ -19,7 +19,9 @@ Item {
             anchors.left: parent.left
 
             onClicked: {
-                moduleWindowLoader.source = "Setup.qml"
+                setupModule.visible = true
+                systemMonitorModule.visible = false
+                moduleModule.visible = false
             }
         }
 
@@ -32,7 +34,9 @@ Item {
             anchors.left: parent.left
 
             onClicked: {
-                moduleWindowLoader.source = "SystemMonitor.qml"
+                setupModule.visible = false
+                moduleModule.visible = false
+                systemMonitorModule.visible = true
             }
         }
 
@@ -46,7 +50,9 @@ Item {
             anchors.left: parent.left
 
             onClicked: {
-                moduleWindowLoader.source = "Module.qml"
+                setupModule.visible = false
+                systemMonitorModule.visible = false
+                moduleModule.visible = true
             }
         }
     }

@@ -10,11 +10,11 @@ Item {
 
     Loader {
         anchors.fill: parent
-        sourceComponent: setup
+        sourceComponent: setupComponent
     }
 
     Component {
-        id: setup
+        id: setupComponent
 
         Item {
             anchors.centerIn: parent
@@ -25,7 +25,10 @@ Item {
                 function onServerConnected(ip, port) {
                     console.log("Server connected: " + ip + ", port: " + port);
                     newConnectionButton.visible = false
-                    displaySettings.visible = true
+
+                    connectionInfo.visible = true
+                    connectionInfo.ip = ip
+                    connectionInfo.port = port
                 }
             }
 
@@ -48,8 +51,8 @@ Item {
                 y: 150
             }
 
-            Setup.DisplaySettings {
-                id: displaySettings
+            Setup.ConnectionInfo {
+                id: connectionInfo
                 visible: false
             }
         }
