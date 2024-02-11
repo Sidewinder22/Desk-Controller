@@ -3,14 +3,15 @@
 import socket
 
 HOST = "127.0.0.1"
+# HOST = "0.0.0.0"
 PORT = 9999
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.bind((HOST, PORT))
     s.listen()
     conn, addr = s.accept()
-    
-    try: 
+
+    try:
         with conn:
             print(f"Client connected: {addr}")
             while True:
@@ -19,7 +20,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                     break
 
                 print(f"Data received from client {data}")
-                message = b"Hello from server!"
+                message = b"Hello from test server!"
 
                 conn.sendall(message)
 

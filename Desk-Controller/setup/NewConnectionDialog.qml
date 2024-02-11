@@ -14,6 +14,19 @@ Item {
         title: "Enter data for a new connection"
         standardButtons: Dialog.Ok | Dialog.Cancel
 
+        function connect() {
+            console.log("Ok clicked")
+
+            var port = parseInt(portTextField.text)
+            if (port < 1024 || port > 65535)
+            {
+                wrongPortMessageDialog.open()
+                return
+            }
+
+            backend.ipAndPortDataReady(ipTextField.text, port)
+        }
+
         contentItem: GridLayout {
             id: setupGridLayout
             rows: 2
@@ -63,23 +76,17 @@ Item {
                             return
                         }
                     }
+
+                    Keys.onReturnPressed: {
+                        console.log("port - Enter pressed");
+                        newConnectionDialog.connect();
+                        newConnectionDialog.visible = false;
+                    }
                 }
             }
         }
 
-        onAccepted: function() {
-            console.log("Ok clicked")
-
-            var port = parseInt(portTextField.text)
-            if (port < 1024 || port > 65535)
-            {
-                wrongPortMessageDialog.open()
-                return
-            }
-
-            backend.ipAndPortDataReady(ipTextField.text, port)
-
-        }
+        onAccepted: connect()
         onRejected: console.log("Cancel")
     }
 
