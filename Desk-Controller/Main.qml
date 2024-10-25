@@ -8,6 +8,15 @@ ApplicationWindow {
     visible: true
     title: qsTr("Desk Controller")
 
+    signal setupCompleted(string ip, int port);
+
+    onSetupCompleted: (ip, port) => {
+        setupModule.visible = false;
+
+        systemMonitorModule.visible = true;
+        systemMonitorModule.setup(ip, port);
+    }
+
     SideBar { }
 
     Setup {

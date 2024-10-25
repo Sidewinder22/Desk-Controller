@@ -15,8 +15,6 @@ Item {
         standardButtons: Dialog.Ok | Dialog.Cancel
 
         function connect() {
-            console.log("Ok clicked")
-
             var port = parseInt(portTextField.text)
             if (port < 1024 || port > 65535)
             {
