@@ -1,8 +1,8 @@
-@startuml Desk Controller v0.0.1
+@startuml Desk Controller v1.0.0
 
-title Desk Controller v0.0.1
+title Desk Controller v1.0.0
 
-node "Desk Controller" {
+node "Desk-Controller [i.e. Raspberry Pi]" {
 	node "UI" {
 		[System Monitor]
 	}
@@ -17,8 +17,8 @@ node "Desk Controller" {
 }
 
 node "Monitored PC" {
-	node "System Monitor Client app" {
-		Socket <-- [System Monitor Client]
+	node "Backend app" {
+		Socket <-- [System-Monitor-Client]
 	}
 }
 

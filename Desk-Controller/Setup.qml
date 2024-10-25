@@ -29,6 +29,8 @@ Item {
                     connectionInfo.visible = true
                     connectionInfo.ip = ip
                     connectionInfo.port = port
+
+                    root.setupCompleted(ip, port);
                 }
             }
 

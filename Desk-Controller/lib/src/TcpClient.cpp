@@ -35,7 +35,8 @@ void TcpClient::disconnected()
 
 void TcpClient::readyRead()
 {
-    std::cout << "message: " << tcpSocket_->readAll().toStdString() << std::endl;
+    std::cout << __func__ << std::endl;
+    std::cout << tcpSocket_->readAll().toStdString() << std::endl;
 }
 
 void TcpClient::printError(QAbstractSocket::SocketError socketError)
