@@ -2,8 +2,6 @@ import QtQuick
 import QtQuick.Controls
 
 Item {
-    id: connectionInfoItem
-
     property string ip: "0.0.0.0"
     property int port: 0000
 
@@ -29,14 +27,14 @@ Item {
 
         Label {
             id: ipLabel
-            text: "IP address: " + connectionInfoItem.ip
+            text: "IP address: " + connectionInfoPanel.ip
 
             anchors.top: connectionInfoTitle.bottom
         }
 
         Label {
             id: portLabel
-            text: "Port number: " + connectionInfoItem.port
+            text: "Port number: " + connectionInfoPanel.port
 
             anchors.top: ipLabel.bottom
         }

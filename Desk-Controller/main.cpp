@@ -8,9 +8,9 @@ int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
-    QQuickStyle::setStyle("Fusion");
+    // QQuickStyle::setStyle("Fusion");
     // QQuickStyle::setStyle("Material");
-    // QQuickStyle::setStyle("Universal");
+    QQuickStyle::setStyle("Universal");
     // QQuickStyle::setStyle("Imagine");
 
     QQmlApplicationEngine engine;
