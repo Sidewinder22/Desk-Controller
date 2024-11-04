@@ -14,7 +14,7 @@ ApplicationWindow {
         setupModule.visible = false;
 
         systemMonitorModule.visible = true;
-        systemMonitorModule.setup(ip, port);
+        systemMonitorModule.setupCompleted(ip, port);
     }
 
     SideBar { }
@@ -24,7 +24,7 @@ ApplicationWindow {
         visible: true
     }
 
-    SystemMonitor {
+    SystemMonitorModule {
         id: systemMonitorModule
         visible: false
         anchors.fill: parent

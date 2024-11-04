@@ -26,9 +26,9 @@ Item {
                     console.log("Server connected: " + ip + ", port: " + port);
                     newConnectionButton.visible = false
 
-                    connectionInfo.visible = true
-                    connectionInfo.ip = ip
-                    connectionInfo.port = port
+                    connectionInfoPanel.visible = true
+                    connectionInfoPanel.ip = ip
+                    connectionInfoPanel.port = port
 
                     root.setupCompleted(ip, port);
                 }
@@ -53,8 +53,8 @@ Item {
                 y: 150
             }
 
-            Setup.ConnectionInfo {
-                id: connectionInfo
+            Setup.ConnectionInfoPanel {
+                id: connectionInfoPanel
                 visible: false
             }
         }
