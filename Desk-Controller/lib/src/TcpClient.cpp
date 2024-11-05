@@ -25,7 +25,7 @@ void TcpClient::connected()
     const char *hello = "Hello from Desk-Controller!";
     tcpSocket_->write(hello, qstrlen(hello));
 
-    emit connectedToServer(tcpSocket_->peerAddress().toString(), tcpSocket_->peerPort());
+    emit serverConnected(tcpSocket_->peerAddress().toString(), tcpSocket_->peerPort());
 }
 
 void TcpClient::disconnected()
@@ -35,8 +35,9 @@ void TcpClient::disconnected()
 
 void TcpClient::readyRead()
 {
-    std::cout << __func__ << std::endl;
-    std::cout << tcpSocket_->readAll().toStdString() << std::endl;
+    auto processInfo = tcpSocket_->readAll();
+    std::cout << processInfo.toStdString() << std::endl;
+    emit processInfoIsReady(processInfo);
 }
 
 void TcpClient::printError(QAbstractSocket::SocketError socketError)

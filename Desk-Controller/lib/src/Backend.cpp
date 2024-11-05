@@ -10,7 +10,8 @@ Backend::Backend(QObject *parent)
     : QObject(parent)
     , tcpClient_(new TcpClient(parent))
 {
-    connect(tcpClient_, &TcpClient::connectedToServer, this, &Backend::connected);
+    connect(tcpClient_, &TcpClient::serverConnected, this, &Backend::connected);
+    connect(tcpClient_, &TcpClient::processInfoIsReady, this, &Backend::processInfoIsReady);
 }
 
 void Backend::ipAndPortDataReady(const QString &ip, const uint16_t &port)
@@ -24,4 +25,11 @@ void Backend::connected(const QString &ip, const uint16_t port)
               << ", port; " << port << "\n";
 
     emit serverConnected(ip, port);
+}
+
+void Backend::processInfoIsReady(const QString &processInfo)
+{
+    std::cout << __func__ << "\n";
+
+    emit sendProcessInfo(processInfo);
 }
