@@ -13,7 +13,8 @@ public:
     void connectToServer(const QString& ipAddress, uint16_t portNumber);
 
 signals:
-    void connectedToServer(const QString &ip, const uint16_t port);
+    void serverConnected(const QString &ip, const uint16_t port);
+    void processInfoIsReady(const QString &processInfo);
 
 private slots:
     void connected();

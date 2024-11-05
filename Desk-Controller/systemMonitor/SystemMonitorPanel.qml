@@ -6,6 +6,7 @@ Item {
     property int port: 0000
 
     Rectangle {
+        id: mainRectangle
         x: 150
         y: 100
         width: 600
@@ -30,13 +31,35 @@ Item {
             text: "IP address: " + systemMonitorPanel.ip
 
             anchors.top: panelTitle.bottom
+            anchors.margins: 5
         }
 
         Label {
             id: portLabel
             text: "Port number: " + systemMonitorPanel.port
 
+            anchors.top: panelTitle.bottom
+            anchors.left: ipLabel.right
+            anchors.margins: 5
+        }
+
+        TextArea {
+            id: outputTextField
+            placeholderText: qsTr("Process Info...")
+
             anchors.top: ipLabel.bottom
+            anchors.left: mainRectangle.left
+            anchors.right: mainRectangle.right
+            anchors.bottom: mainRectangle.bottom
+            anchors.margins: 10
+
+            Connections {
+                target: backend
+
+                function onSendProcessInfo(processInfo) {
+                    outputTextField.text = processInfo
+                }
+            }
         }
     }
 }
