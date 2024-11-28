@@ -14,12 +14,10 @@ Item {
 
         ipAddress = ip
         portNumber = port
-        systemMonitorEnabled = true
     }
 
     property string ipAddress: "0.0.0.0"
     property int portNumber: 0;
-    property bool systemMonitorEnabled: false;
 
     Loader {
         anchors.fill: parent
@@ -35,20 +33,8 @@ Item {
 
             SystemMonitor.SystemMonitorPanel {
                 id: systemMonitorPanel
-                visible: systemMonitorModule.systemMonitorEnabled
                 ip: systemMonitorModule.ipAddress
                 port: systemMonitorModule.portNumber
-            }
-
-            ColumnLayout {
-                id: columnLayout
-                spacing: 10
-                visible: !systemMonitorModule.systemMonitorEnabled
-
-                Label {
-                id: systemMonitorLabel
-                text: "### System Monitor ###"
-                }
             }
         }
     }

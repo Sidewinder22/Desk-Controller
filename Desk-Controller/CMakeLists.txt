@@ -21,6 +21,7 @@ qt_add_qml_module(appDesk-Controller
     QML_FILES SystemMonitorModule.qml
     QML_FILES Module.qml
     QML_FILES Setup.qml
+    QML_FILES components/Panel.qml
     QML_FILES setup/NewConnectionDialog.qml
     QML_FILES setup/ConnectionInfoPanel.qml
     QML_FILES systemMonitor/SystemMonitorPanel.qml
