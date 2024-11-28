@@ -1,19 +1,13 @@
 import QtQuick
 import QtQuick.Controls
+import '../components' as Components
 
 Item {
     property string ip: "0.0.0.0"
     property int port: 0000
 
-    Rectangle {
-        x: 150
-        y: 100
-        width: 600
-        height: 450
-        color: "#9bcad4"
-        border.color: "lightsteelblue"
-        border.width: 4
-        radius: 8
+    Components.Panel {
+        id: panel
 
         Label {
             id: connectionInfoTitle
