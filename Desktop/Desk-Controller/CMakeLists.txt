@@ -1,10 +1,12 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.25)
 
 project(Desk-Controller VERSION 0.1 LANGUAGES CXX)
 
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt6 6.5 REQUIRED COMPONENTS Quick)
+find_package(Qt6 6.5 REQUIRED COMPONENTS QuickControls2)
 
 qt_standard_project_setup(REQUIRES 6.5)
 
@@ -32,6 +34,8 @@ set_target_properties(appDesk-Controller PROPERTIES
 
 target_link_libraries(appDesk-Controller
     PRIVATE Qt6::Quick
+    PRIVATE Qt6::QuickControls2
+    backend
 )
 
 include(GNUInstallDirs)
@@ -40,3 +44,5 @@ install(TARGETS appDesk-Controller
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
+
+add_subdirectory(lib)
