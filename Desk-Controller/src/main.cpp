@@ -8,12 +8,8 @@ int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
-    // QQuickStyle::setStyle("Fusion");
-    // QQuickStyle::setStyle("Material");
-    // QQuickStyle::setStyle("Universal");
-    // QQuickStyle::setStyle("Imagine");
-
     QQmlApplicationEngine engine;
+    QGuiApplication::setApplicationName("Desk-Controller");
 
     Backend *backend = new Backend(&app);
     engine.rootContext()->setContextProperty("backend", backend);
