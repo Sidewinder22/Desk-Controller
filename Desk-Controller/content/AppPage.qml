@@ -3,9 +3,9 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 Window {
-    id: mainWindows
+    id: window
     visible: true
-    title: qsTr("Hello World")
+    title: qsTr("App Page")
     // visibility: Qt.WindowFullScreen
     width: 900
     height: 600
@@ -85,6 +85,10 @@ Window {
             Button {
                 Layout.alignment: Qt.AlignCenter
                 text: "Click me"
+
+                onClicked: {
+                    console.log("Clicked!")
+                }
             }
         }
 
