@@ -1,6 +1,6 @@
 import QtQuick
 import content
 
-AppPage {
+App {
 
 }

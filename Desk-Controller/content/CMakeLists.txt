@@ -5,4 +5,6 @@ qt_add_qml_module(DeskControllerContent
     VERSION 1.0
     QML_FILES
         AppPage.qml
+        App.qml
+        HomePage.qml
 )
