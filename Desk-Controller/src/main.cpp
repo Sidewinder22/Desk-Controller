@@ -2,6 +2,9 @@
 #include <QQmlApplicationEngine>
 #include <QQuickStyle>
 #include <QQmlContext>
+
+#include "app_environment.h"
+#include "import_qml_plugins.h"
 #include "Backend.hpp"
 
 int main(int argc, char *argv[])
@@ -20,7 +23,7 @@ int main(int argc, char *argv[])
         &app,
         []() { QCoreApplication::exit(-1); },
         Qt::QueuedConnection);
-    engine.loadFromModule("Desk-Controller", "Main");
+    engine.loadFromModule("Main", "Main");
 
     return app.exec();
 }
