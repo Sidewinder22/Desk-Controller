@@ -6,6 +6,8 @@ Page {
     id: root
 
     header: ColumnLayout {
+        spacing: 0
+
         MenuBar {
             Menu {
                 title: qsTr("&File")
@@ -73,7 +75,7 @@ Page {
     }
 
     background: Rectangle {
-        color: "lightblue"
+        // color: "lightblue"
     }
 
     StackView {
@@ -85,36 +87,16 @@ Page {
         anchors.top: parent.top
     }
 
-    Component {
+    MainView {
         id: mainView
-
-        Row {
-            spacing: 10
-
-            Label {
-                text: "Main view"
-            }
-        }
     }
 
-    Component {
-        id: secondView
-
-        Row {
-            Label {
-                text: "Second View"
-            }
-        }
+    PCMonitor {
+        id: pcMonitor
     }
 
-    Component {
-        id: thirdView
-
-        Row {
-            Label {
-                text: "Third View"
-            }
-        }
+    RoomMonitor {
+        id: roomMonitor
     }
 
     // SideBar
@@ -128,21 +110,24 @@ Page {
         Button {
             text: "Main"
             onClicked: {
-                stackView.push(mainView);
+                if (stackView.depth > 1) {
+                    stackView.pop()
+                }
             }
         }
         Button {
             text: "Second"
-            onClicked: stackView.push(secondView)
+            onClicked: {
+                stackView.pop()
+                stackView.push(pcMonitor)
+            }
         }
         Button {
             text: "Third"
-            onClicked: stackView.push(thirdView)
-        }
-        Button {
-            text: "Back"
-            enabled: stackView.depth > 1
-            onClicked: stackView.pop()
+            onClicked: {
+                stackView.pop()
+                stackView.push(roomMonitor)
+            }
         }
     }
 
