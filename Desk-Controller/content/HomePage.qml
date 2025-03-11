@@ -5,21 +5,7 @@ import QtQuick.Layouts
 Page {
     id: root
 
-    header: ColumnLayout {
-        spacing: 0
-
-        AppMenu {
-            id: appMenu
-        }
-
-        TopToolBar {
-            id: topToolBar
-        }
-    }
-
-    // background: Rectangle {
-    //     color: "lightblue"
-    // }
+    header: Bars { }
 
     StackView {
         id: stackView

@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Controls
 import DeskController
 
 Window {
@@ -14,5 +15,12 @@ Window {
     HomePage {
         id: mainScreen
         anchors.fill: parent
+    }
+
+    ConnectDialog {
+        id: connectDialog
+
+        visible: false
+        anchors.centerIn: Overlay.overlay
     }
 }
