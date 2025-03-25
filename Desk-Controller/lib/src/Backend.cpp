@@ -3,35 +3,26 @@
  */
 
 #include <iostream>
-#include <print>
+#include <source_location>
 #include <QString>
 #include "Backend.hpp"
+#include "TcpServer.hpp"
+
+using sl = std::source_location;
 
 Backend::Backend(QObject *parent)
-    : QObject(parent)
-    , prefix_("Backend::")
-    , tcpClient_(new TcpClient(parent))
+    : QObject{parent}
+    , pcMonitor_{new TcpServer(9999)}
 {
-    connect(tcpClient_, &TcpClient::serverConnected, this, &Backend::connected);
-    connect(tcpClient_, &TcpClient::processInfoIsReady, this, &Backend::processInfoIsReady);
+    connect(pcMonitor_, &TcpServer::dataReady, this, &Backend::dataReady);
 
-    std::println("Backend created");
-    tcpClient_->connectToServer("127.0.0.1", 9999);
+    std::cout << sl::current().function_name() << ", ready" << std::endl;
+
+    pcMonitor_->start();
 }
 
-void Backend::ipAndPortDataReady(const QString &ip, const uint16_t &port)
+void Backend::dataReady(const QString &data)
 {
-    tcpClient_->connectToServer(ip, port);
-}
-
-void Backend::connected(const QString &ip, const uint16_t port)
-{
-    std::println("{}{}, connected to server, ip: {}, port: {}", prefix_, __func__, ip.toStdString(), port);
-    emit serverConnected(ip, port);
-}
-
-void Backend::processInfoIsReady(const QString &processInfo)
-{
-    std::println("{}{}", prefix_, __func__);
-    emit sendProcessInfo(processInfo);
+    std::cout << sl::current().function_name() << std::endl;
+    std::cout << data.toStdString() << std::endl;
 }
