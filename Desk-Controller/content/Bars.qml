@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import DeskController
 
 ColumnLayout {
 
@@ -51,7 +52,7 @@ ColumnLayout {
 
             Label {
                 id: headerToolBarLabel
-                text: "Status: --Disconnected--"
+                text: Constants.headerToolBarDisconnectedLabel
                 elide: Label.ElideRight
                 horizontalAlignment: Qt.AlignHCenter
                 verticalAlignment: Qt.AlignVCenter
@@ -63,12 +64,13 @@ ColumnLayout {
             }
 
             Label {
-                text: "IP: 0.0.0.0"
+                id: headerIpLabel
+                text: Constants.nullIpAddress
                 elide: Label.ElideRight
                 horizontalAlignment: Qt.AlignHCenter
                 verticalAlignment: Qt.AlignVCenter
                 Layout.fillWidth: true
-            }
+           }
 
             Label {
                 text: "Port: 9999"
@@ -76,6 +78,20 @@ ColumnLayout {
                 horizontalAlignment: Qt.AlignHCenter
                 verticalAlignment: Qt.AlignVCenter
                 Layout.fillWidth: true
+            }
+        }
+
+        Connections {
+            target: backend
+
+            function onPcMonitorConnected(ipAddress) {
+                headerIpLabel.text = Constants.ipAddressName + ipAddress
+                headerToolBarLabel.text = Constants.headerToolBarConnectedLabel
+            }
+
+            function onPcMonitorDisconnected() {
+                headerIpLabel.text = Constants.nullIpAddress
+                headerToolBarLabel.text = Constants.headerToolBarDisconnectedLabel
             }
         }
     }
