@@ -16,10 +16,13 @@ public:
 
 signals:
     void dataReady(const QString &data);
+    void tcpSocketConnected(const QString &ipAddress);
+    void tcpSocketDisconnected();
 
 public slots:
     void newConnection();
     void readyRead();
+    void tcpSocketDisconnectedSlot();
 
 private:
     QTcpServer *server_ = nullptr;

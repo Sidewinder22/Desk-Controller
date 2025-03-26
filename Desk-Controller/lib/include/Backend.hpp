@@ -5,7 +5,6 @@
 #ifndef BACKEND_H
 #define BACKEND_H
 
-#include <memory>
 #include <QObject>
 #include "TcpServer.hpp"
 
@@ -17,9 +16,14 @@ public:
     explicit Backend(QObject *parent = nullptr);
 
 signals:
+    void pcMonitorConnected(const QString &ipAddress);
+    void pcMonitorDisconnected();
+    void loadDataReceived(const QString &loadData);
 
 public slots:
     void dataReady(const QString &data);
+    void pcMonitorConnectedSlot(const QString &ipAddress);
+    void pcMonitorDisconnectedSlot();
 
 private:
     TcpServer *pcMonitor_;

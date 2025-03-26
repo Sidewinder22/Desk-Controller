@@ -37,7 +37,7 @@ bool TcpServer::start()
     }
     else
     {
-        std::cout << sl::current().function_name() << ", server coulnd't start!" << std::endl;
+        std::cout << sl::current().function_name() << ", server couldn't start!" << std::endl;
         return false;
     }
 }
@@ -48,13 +48,17 @@ void TcpServer::newConnection()
 
     socket_ = server_->nextPendingConnection();
     connect(socket_, &QTcpSocket::readyRead, this, &TcpServer::readyRead);
+    connect(socket_, &QTcpSocket::disconnected, this, &TcpServer::tcpSocketDisconnectedSlot);
 
     const char *hello = "Hello from Desk-Controller!";
     socket_->write(hello, qstrlen(hello));
     socket_->flush();
 
+
     auto data = socket_->readAll();
     std::cout << data.toStdString() << std::endl;
+
+    emit tcpSocketConnected(socket_->peerAddress().toString());
 }
 
 void TcpServer::readyRead()
@@ -63,4 +67,10 @@ void TcpServer::readyRead()
 
     auto data = socket_->readAll();
     emit dataReady(data);
+}
+
+void TcpServer::tcpSocketDisconnectedSlot()
+{
+    std::cout << sl::current().function_name() << std::endl;
+    emit tcpSocketDisconnected();
 }
