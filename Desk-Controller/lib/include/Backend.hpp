@@ -14,16 +14,17 @@ class Backend : public QObject
 
 public:
     explicit Backend(QObject *parent = nullptr);
+    ~Backend() override = default;
 
 signals:
-    void pcMonitorConnected(const QString &ipAddress);
-    void pcMonitorDisconnected();
-    void loadDataReceived(const QString &loadData);
+    void pcMonitorConnectedNotif(const QString &ipAddress);
+    void pcMonitorDataReceivedNotif(const QString &loadData);
+    void pcMonitorDisconnectedNotif();
 
 public slots:
-    void dataReady(const QString &data);
-    void pcMonitorConnectedSlot(const QString &ipAddress);
-    void pcMonitorDisconnectedSlot();
+    void pcMonitorConnected(const QString &ipAddress);
+    void pcMonitorDataReceived(const QString &data);
+    void pcMonitorDisconnected();
 
 private:
     TcpServer *pcMonitor_;

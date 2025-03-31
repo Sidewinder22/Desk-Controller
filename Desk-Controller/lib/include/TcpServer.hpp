@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QTcpServer>
 #include <QTcpSocket>
+#include <QScopedPointer>
+#include "PCMonitor.hpp"
 
 class TcpServer : public QObject
 {
@@ -11,22 +13,22 @@ class TcpServer : public QObject
 
 public:
     TcpServer(quint16 port, QObject *parent = nullptr);
-    virtual ~TcpServer();
+    ~TcpServer() override;
     bool start();
 
 signals:
-    void dataReady(const QString &data);
-    void tcpSocketConnected(const QString &ipAddress);
-    void tcpSocketDisconnected();
+    void pcMonitorConnectedNotif(const QString &ipAddress);
+    void pcMonitorDataReceivedNotif(const QString &data);
+    void pcMonitorDisconnectedNotif();
 
 public slots:
     void newConnection();
-    void readyRead();
-    void tcpSocketDisconnectedSlot();
+    void pcMonitorDataReceived(const QString &data);
+    void pcMonitorDisconnected();
 
 private:
     QTcpServer *server_ = nullptr;
-    QTcpSocket *socket_ = nullptr;
+    QScopedPointer<PCMonitor> pcMonitor_;
     quint16 port_;
 };
 

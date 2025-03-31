@@ -4,12 +4,14 @@ set(LIB backend)
 
 set(HEADERS
     include/Backend.hpp
+    include/PCMonitor.hpp
     include/TcpServer.hpp
 )
 
 set(SOURCES
     src/Backend.cpp
     src/TcpServer.cpp
+    src/PCMonitor.cpp
 )
 
 qt_add_library(${LIB} SHARED

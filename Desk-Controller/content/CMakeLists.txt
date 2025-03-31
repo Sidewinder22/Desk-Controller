@@ -11,6 +11,7 @@ qt_add_qml_module(DeskControllerContent
         HomePage.qml
         MainView.qml
         PCMonitor.qml
+        PCMonitorWidget.qml
         RoomMonitor.qml
         SideBar.qml
 
