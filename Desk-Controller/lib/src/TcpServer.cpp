@@ -6,7 +6,9 @@
 using sl = std::source_location;
 
 TcpServer::TcpServer(quint16 port, QObject *parent)
-    : server_(new QTcpServer(this))
+    : QObject(parent)
+    , server_(new QTcpServer(this))
+    , pcMonitor_(nullptr)
     , port_(port)
 {
     std::cout << sl::current().function_name() << ", TCP server/* is ready" << std::endl;
@@ -16,10 +18,11 @@ TcpServer::TcpServer(quint16 port, QObject *parent)
 
 TcpServer::~TcpServer()
 {
-    if (socket_->isOpen())
+    if (pcMonitor_)
     {
-        socket_->close();
+        pcMonitor_.reset();
     }
+
     if (server_->isListening())
     {
         server_->close();
@@ -46,31 +49,40 @@ void TcpServer::newConnection()
 {
     std::cout << sl::current().function_name() << std::endl;
 
-    socket_ = server_->nextPendingConnection();
-    connect(socket_, &QTcpSocket::readyRead, this, &TcpServer::readyRead);
-    connect(socket_, &QTcpSocket::disconnected, this, &TcpServer::tcpSocketDisconnectedSlot);
+    QTcpSocket *socket = server_->nextPendingConnection();
 
-    const char *hello = "Hello from Desk-Controller!";
-    socket_->write(hello, qstrlen(hello));
-    socket_->flush();
+    socket->waitForReadyRead();
+    std::cout << sl::current().function_name() << " connected!" << std::endl;
 
+    auto data = socket->readAll();
+    std::cout << "Hostname: " << data.toStdString() << std::endl;
 
-    auto data = socket_->readAll();
-    std::cout << data.toStdString() << std::endl;
+    if (data == "PC Monitor")
+    {
+        std::cout << sl::current().function_name() << "PC Monitor connected" << std::endl;
 
-    emit tcpSocketConnected(socket_->peerAddress().toString());
+        auto ipAddres = socket->peerAddress().toString();
+
+        pcMonitor_.reset(new PCMonitor(socket, this));
+        connect(pcMonitor_.get(), &PCMonitor::pcMonitorDisconnectedNotif, this, &TcpServer::pcMonitorDisconnected);
+        connect(pcMonitor_.get(), &PCMonitor::dataReceivedNotif, this, &TcpServer::pcMonitorDataReceived);
+
+        emit pcMonitorConnectedNotif(ipAddres);
+    }
+    else
+    {
+        std::cout << sl::current().function_name() << "Other device connected - nothing to do" << std::endl;
+    }
 }
 
-void TcpServer::readyRead()
+void TcpServer::pcMonitorDisconnected()
 {
     std::cout << sl::current().function_name() << std::endl;
-
-    auto data = socket_->readAll();
-    emit dataReady(data);
+    emit pcMonitorDisconnectedNotif();
 }
 
-void TcpServer::tcpSocketDisconnectedSlot()
+void TcpServer::pcMonitorDataReceived(const QString &data)
 {
     std::cout << sl::current().function_name() << std::endl;
-    emit tcpSocketDisconnected();
+    emit pcMonitorDataReceivedNotif(data);
 }

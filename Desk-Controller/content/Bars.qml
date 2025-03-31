@@ -84,12 +84,12 @@ ColumnLayout {
         Connections {
             target: backend
 
-            function onPcMonitorConnected(ipAddress) {
+            function onPcMonitorConnectedNotif(ipAddress) {
                 headerIpLabel.text = Constants.ipAddressName + ipAddress
                 headerToolBarLabel.text = Constants.headerToolBarConnectedLabel
             }
 
-            function onPcMonitorDisconnected() {
+            function onPcMonitorDisconnectedNotif() {
                 headerIpLabel.text = Constants.nullIpAddress
                 headerToolBarLabel.text = Constants.headerToolBarDisconnectedLabel
             }

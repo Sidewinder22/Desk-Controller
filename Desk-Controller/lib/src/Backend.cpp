@@ -14,31 +14,31 @@ Backend::Backend(QObject *parent)
     : QObject{parent}
     , pcMonitor_{new TcpServer(9999)}
 {
-    connect(pcMonitor_, &TcpServer::dataReady, this, &Backend::dataReady);
-    connect(pcMonitor_, &TcpServer::tcpSocketConnected, this, &Backend::pcMonitorConnectedSlot);
-    connect(pcMonitor_, &TcpServer::tcpSocketDisconnected, this, &Backend::pcMonitorDisconnected);
+    connect(pcMonitor_, &TcpServer::pcMonitorConnectedNotif, this, &Backend::pcMonitorConnected);
+    connect(pcMonitor_, &TcpServer::pcMonitorDataReceivedNotif, this, &Backend::pcMonitorDataReceived);
+    connect(pcMonitor_, &TcpServer::pcMonitorDisconnectedNotif, this, &Backend::pcMonitorDisconnected);
 
     std::cout << sl::current().function_name() << ", ready" << std::endl;
 
     pcMonitor_->start();
 }
 
-void Backend::dataReady(const QString &data)
+void Backend::pcMonitorDataReceived(const QString &data)
 {
     std::cout << sl::current().function_name() << std::endl;
     std::cout << data.toStdString() << std::endl;
 
-    emit loadDataReceived(data);
+    emit pcMonitorDataReceivedNotif(data);
 }
 
-void Backend::pcMonitorConnectedSlot(const QString &ipAddress)
+void Backend::pcMonitorConnected(const QString &ipAddress)
 {
     std::cout << sl::current().function_name() << std::endl;
-     emit pcMonitorConnected(ipAddress);
+     emit pcMonitorConnectedNotif(ipAddress);
 }
 
-void Backend::pcMonitorDisconnectedSlot()
+void Backend::pcMonitorDisconnected()
 {
     std::cout << sl::current().function_name() << std::endl;
-    emit pcMonitorDisconnected();
+    emit pcMonitorDisconnectedNotif();
 }
