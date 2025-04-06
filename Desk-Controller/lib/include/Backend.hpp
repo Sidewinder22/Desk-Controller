@@ -17,17 +17,25 @@ public:
     ~Backend() override = default;
 
 signals:
-    void pcMonitorConnectedNotif(const QString &ipAddress);
+    void pcMonitorConnectedNotif(const QString &ipAddress, const QString &hostname);
     void pcMonitorDataReceivedNotif(const QString &loadData);
     void pcMonitorDisconnectedNotif();
 
+    void rpiMonitorConnectedNotif(const QString &ipAddress, const QString &hostname);
+    void rpiMonitorDataReceivedNotif(const QString &loadData);
+    void rpiMonitorDisconnectedNotif();
+
 public slots:
-    void pcMonitorConnected(const QString &ipAddress);
+    void pcMonitorConnected(const QString &ipAddress, const QString &hostname);
     void pcMonitorDataReceived(const QString &data);
     void pcMonitorDisconnected();
 
+    void rpiMonitorConnected(const QString &ipAddress, const QString &hostname);
+    void rpiMonitorDataReceived(const QString &data);
+    void rpiMonitorDisconnected();
+
 private:
-    TcpServer *pcMonitor_;
+    TcpServer *tcpServer_;
 };
 
 #endif // BACKEND_H

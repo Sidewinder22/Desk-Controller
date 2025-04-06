@@ -9,15 +9,15 @@ Rectangle {
 
     width: 600
     height: 700
-    color: "#e6ffe6"
+    color: "#f2e6ff"
 
-    border.color: "#00cc00"
+    border.color: "#6600cc"
     border.width: 5
     radius: 10
 
     Label {
-        id: pcMonitorWidgetTitle
-        text: "PC Monitor"
+        id: rpiMonitorWidgetTitle
+        text: "Rpi Monitor"
         font.pixelSize: 30
         font.bold: true
 
@@ -27,22 +27,22 @@ Rectangle {
     }
 
     Label {
-        id: pcMonitorWidgetHostname
-        text: "Hostname: " + pcMonitorWidget.hostname
+        id: rpiMonitorWidgetHostname
+        text: "Hostname: " + rpiMonitorWidget.hostname
         font.pixelSize: 20
 
-        anchors.top: pcMonitorWidgetTitle.bottom
+        anchors.top: rpiMonitorWidgetTitle.bottom
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.margins: 20
     }
 
     Label {
-        id: pcMonitorWidgetIpAddress
-        text: "IP address: " + pcMonitorWidget.ipAddress
+        id: rpiMonitorWidgetIpAddress
+        text: "IP address: " + rpiMonitorWidget.ipAddress
         font.pixelSize: 20
 
-        anchors.top: pcMonitorWidgetHostname.bottom
+        anchors.top: rpiMonitorWidgetHostname.bottom
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.margins: 20
@@ -51,9 +51,9 @@ Rectangle {
     TextArea {
         id: loadDataField
         placeholderText: "Load data..."
-        text: pcMonitorWidget.loadData
+        text: rpiMonitorWidget.loadData
 
-        anchors.top: pcMonitorWidgetIpAddress.bottom
+        anchors.top: rpiMonitorWidgetIpAddress.bottom
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom

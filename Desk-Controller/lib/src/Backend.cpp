@@ -12,15 +12,19 @@ using sl = std::source_location;
 
 Backend::Backend(QObject *parent)
     : QObject{parent}
-    , pcMonitor_{new TcpServer(9999)}
+    , tcpServer_{new TcpServer(9999)}
 {
-    connect(pcMonitor_, &TcpServer::pcMonitorConnectedNotif, this, &Backend::pcMonitorConnected);
-    connect(pcMonitor_, &TcpServer::pcMonitorDataReceivedNotif, this, &Backend::pcMonitorDataReceived);
-    connect(pcMonitor_, &TcpServer::pcMonitorDisconnectedNotif, this, &Backend::pcMonitorDisconnected);
+    connect(tcpServer_, &TcpServer::pcMonitorConnectedNotif, this, &Backend::pcMonitorConnected);
+    connect(tcpServer_, &TcpServer::pcMonitorDataReceivedNotif, this, &Backend::pcMonitorDataReceived);
+    connect(tcpServer_, &TcpServer::pcMonitorDisconnectedNotif, this, &Backend::pcMonitorDisconnected);
+
+    connect(tcpServer_, &TcpServer::rpiMonitorConnectedNotif, this, &Backend::rpiMonitorConnected);
+    connect(tcpServer_, &TcpServer::rpiMonitorDataReceivedNotif, this, &Backend::rpiMonitorDataReceived);
+    connect(tcpServer_, &TcpServer::rpiMonitorDisconnectedNotif, this, &Backend::rpiMonitorDisconnected);
 
     std::cout << sl::current().function_name() << ", ready" << std::endl;
 
-    pcMonitor_->start();
+    tcpServer_->start();
 }
 
 void Backend::pcMonitorDataReceived(const QString &data)
@@ -31,14 +35,32 @@ void Backend::pcMonitorDataReceived(const QString &data)
     emit pcMonitorDataReceivedNotif(data);
 }
 
-void Backend::pcMonitorConnected(const QString &ipAddress)
+void Backend::pcMonitorConnected(const QString &ipAddress, const QString &hostname)
 {
     std::cout << sl::current().function_name() << std::endl;
-     emit pcMonitorConnectedNotif(ipAddress);
+     emit pcMonitorConnectedNotif(ipAddress, hostname);
 }
 
 void Backend::pcMonitorDisconnected()
 {
     std::cout << sl::current().function_name() << std::endl;
     emit pcMonitorDisconnectedNotif();
+}
+
+void Backend::rpiMonitorConnected(const QString &ipAddress, const QString &hostname)
+{
+    std::cout << sl::current().function_name() << std::endl;
+    emit rpiMonitorConnectedNotif(ipAddress, hostname);
+}
+
+void Backend::rpiMonitorDataReceived(const QString &data)
+{
+    std::cout << sl::current().function_name() << std::endl;
+    emit rpiMonitorDataReceivedNotif(data);
+}
+
+void Backend::rpiMonitorDisconnected()
+{
+    std::cout << sl::current().function_name() << std::endl;
+    emit rpiMonitorDisconnectedNotif();
 }

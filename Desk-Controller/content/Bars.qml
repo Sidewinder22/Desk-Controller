@@ -84,7 +84,7 @@ ColumnLayout {
         Connections {
             target: backend
 
-            function onPcMonitorConnectedNotif(ipAddress) {
+            function onPcMonitorConnectedNotif(ipAddress, hostname) {
                 headerIpLabel.text = Constants.ipAddressName + ipAddress
                 headerToolBarLabel.text = Constants.headerToolBarConnectedLabel
             }
