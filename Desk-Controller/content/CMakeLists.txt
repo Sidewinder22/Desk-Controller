@@ -13,6 +13,6 @@ qt_add_qml_module(DeskControllerContent
         PCMonitor.qml
         PCMonitorWidget.qml
         RoomMonitor.qml
+        RpiMonitorWidget.qml
         SideBar.qml
-
 )

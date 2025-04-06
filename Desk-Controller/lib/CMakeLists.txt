@@ -5,12 +5,14 @@ set(LIB backend)
 set(HEADERS
     include/Backend.hpp
     include/PCMonitor.hpp
+    include/RpiMonitor.hpp
     include/TcpServer.hpp
 )
 
 set(SOURCES
     src/Backend.cpp
     src/TcpServer.cpp
+    src/RpiMonitor.cpp
     src/PCMonitor.cpp
 )
 

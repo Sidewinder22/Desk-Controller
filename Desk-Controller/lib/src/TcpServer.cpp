@@ -11,7 +11,7 @@ TcpServer::TcpServer(quint16 port, QObject *parent)
     , pcMonitor_(nullptr)
     , port_(port)
 {
-    std::cout << sl::current().function_name() << ", TCP server/* is ready" << std::endl;
+    std::cout << sl::current().function_name() << ", TCP server is ready" << std::endl;
 
     connect(server_, &QTcpServer::newConnection, this, &TcpServer::newConnection);
 }
@@ -21,6 +21,11 @@ TcpServer::~TcpServer()
     if (pcMonitor_)
     {
         pcMonitor_.reset();
+    }
+
+    if (rpiMonitor_)
+    {
+        rpiMonitor_.reset();
     }
 
     if (server_->isListening())
@@ -33,7 +38,7 @@ bool TcpServer::start()
 {
     std::cout << sl::current().function_name() << std::endl;
 
-    if (server_->listen(QHostAddress::LocalHost, port_))
+    if (server_->listen(QHostAddress::AnyIPv4, port_))
     {
         std::cout << sl::current().function_name() << ", server's listening on port: " << port_ << std::endl;
         return true;
@@ -50,16 +55,14 @@ void TcpServer::newConnection()
     std::cout << sl::current().function_name() << std::endl;
 
     QTcpSocket *socket = server_->nextPendingConnection();
-
     socket->waitForReadyRead();
-    std::cout << sl::current().function_name() << " connected!" << std::endl;
 
-    auto data = socket->readAll();
-    std::cout << "Hostname: " << data.toStdString() << std::endl;
+    auto hostname = socket->readAll().trimmed();
+    std::cout << "Hostname: " << hostname.toStdString() << "." << std::endl;
 
-    if (data == "PC Monitor")
+    if (hostname == pcHostname)
     {
-        std::cout << sl::current().function_name() << "PC Monitor connected" << std::endl;
+        std::cout << sl::current().function_name() << hostname.toStdString() << " connected" << std::endl;
 
         auto ipAddres = socket->peerAddress().toString();
 
@@ -67,7 +70,19 @@ void TcpServer::newConnection()
         connect(pcMonitor_.get(), &PCMonitor::pcMonitorDisconnectedNotif, this, &TcpServer::pcMonitorDisconnected);
         connect(pcMonitor_.get(), &PCMonitor::dataReceivedNotif, this, &TcpServer::pcMonitorDataReceived);
 
-        emit pcMonitorConnectedNotif(ipAddres);
+        emit pcMonitorConnectedNotif(ipAddres, hostname);
+    }
+    else if (hostname == rpiHostname)
+    {
+        std::cout << sl::current().function_name() << hostname.toStdString() << " connected" << std::endl;
+
+        auto ipAddres = socket->peerAddress().toString();
+
+        rpiMonitor_.reset(new RpiMonitor(socket, this));
+        connect(rpiMonitor_.get(), &RpiMonitor::rpiMonitorDisconnectedNotif, this, &TcpServer::rpiMonitorDisconnected);
+        connect(rpiMonitor_.get(), &RpiMonitor::dataReceivedNotif, this, &TcpServer::rpiMonitorDataReceived);
+
+        emit rpiMonitorConnectedNotif(ipAddres, hostname);
     }
     else
     {
@@ -85,4 +100,16 @@ void TcpServer::pcMonitorDataReceived(const QString &data)
 {
     std::cout << sl::current().function_name() << std::endl;
     emit pcMonitorDataReceivedNotif(data);
+}
+
+void TcpServer::rpiMonitorDataReceived(const QString &data)
+{
+    std::cout << sl::current().function_name() << std::endl;
+    emit rpiMonitorDataReceivedNotif(data);
+}
+
+void TcpServer::rpiMonitorDisconnected()
+{
+    std::cout << sl::current().function_name() << std::endl;
+    emit rpiMonitorDisconnectedNotif();
 }
