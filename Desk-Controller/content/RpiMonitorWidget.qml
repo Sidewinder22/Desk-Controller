@@ -3,6 +3,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 Rectangle {
+    id: rpiMonitorWidgetRectangle
     property string loadData;
     property string hostname;
     property string ipAddress;
@@ -28,7 +29,7 @@ Rectangle {
 
     Label {
         id: rpiMonitorWidgetHostname
-        text: "Hostname: " + rpiMonitorWidget.hostname
+        text: "Hostname: " + rpiMonitorWidgetRectangle.hostname
         font.pixelSize: 20
 
         anchors.top: rpiMonitorWidgetTitle.bottom
@@ -39,7 +40,7 @@ Rectangle {
 
     Label {
         id: rpiMonitorWidgetIpAddress
-        text: "IP address: " + rpiMonitorWidget.ipAddress
+        text: "IP address: " + rpiMonitorWidgetRectangle.ipAddress
         font.pixelSize: 20
 
         anchors.top: rpiMonitorWidgetHostname.bottom
@@ -51,7 +52,7 @@ Rectangle {
     TextArea {
         id: loadDataField
         placeholderText: "Load data..."
-        text: rpiMonitorWidget.loadData
+        text: rpiMonitorWidgetRectangle.loadData
 
         anchors.top: rpiMonitorWidgetIpAddress.bottom
         anchors.left: parent.left

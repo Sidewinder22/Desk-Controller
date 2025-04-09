@@ -20,8 +20,8 @@ Page {
         id: mainView
     }
 
-    PCMonitor {
-        id: pcMonitor
+    MonitorView {
+        id: monitorView
     }
 
     RoomMonitor {

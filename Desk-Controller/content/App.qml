@@ -16,11 +16,4 @@ Window {
         id: mainScreen
         anchors.fill: parent
     }
-
-    ConnectDialog {
-        id: connectDialog
-
-        visible: false
-        anchors.centerIn: Overlay.overlay
-    }
 }

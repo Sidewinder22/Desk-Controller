@@ -2,22 +2,21 @@ import QtQuick
 import QtQuick.Controls
 
 Rectangle {
-    id: pcMonitorWidgetRectangle
-    property string loadData;
+    property bool connected;
     property string hostname;
     property string ipAddress;
 
-    width: 600
-    height: 700
-    color: "#e6ffe6"
+    width: 400
+    height: 200
+    color: connected ? "#e6ffe6" : "#ffb3b3"
 
-    border.color: "#00cc00"
+    border.color: connected ? "#00cc00" : "#ff4d4d"
     border.width: 5
     radius: 10
 
     Label {
         id: pcMonitorWidgetTitle
-        text: "PC Monitor"
+        text: "Rpi 4 Monitor"
         font.pixelSize: 30
         font.bold: true
 
@@ -28,7 +27,7 @@ Rectangle {
 
     Label {
         id: pcMonitorWidgetHostname
-        text: "Hostname: " + pcMonitorWidgetRectangle.hostname
+        text: "Hostname: " + pcMonitorWidget.hostname
         font.pixelSize: 20
 
         anchors.top: pcMonitorWidgetTitle.bottom
@@ -39,26 +38,12 @@ Rectangle {
 
     Label {
         id: pcMonitorWidgetIpAddress
-        text: "IP address: " + pcMonitorWidgetRectangle.ipAddress
+        text: "IP address: " + pcMonitorWidget.ipAddress
         font.pixelSize: 20
 
         anchors.top: pcMonitorWidgetHostname.bottom
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.margins: 20
-    }
-
-    TextArea {
-        id: loadDataField
-        placeholderText: "Load data..."
-        text: pcMonitorWidgetRectangle.loadData
-
-        anchors.top: pcMonitorWidgetIpAddress.bottom
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        anchors.margins: 20
-
-        readOnly: true
     }
 }

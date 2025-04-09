@@ -7,10 +7,16 @@ Pane {
 
     ColumnLayout {
         anchors.fill: parent
-        spacing: 10
+        spacing: 20
 
         Label {
-            text: "Room Monitor"
+            text: "Main View"
+
+            elide: Label.ElideRight
+            Layout.alignment: Qt.AlignHCenter
+
+            font.bold: true
+            font.pixelSize: 40
         }
     }
 }

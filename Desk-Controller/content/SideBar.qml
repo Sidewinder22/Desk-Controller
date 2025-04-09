@@ -22,7 +22,7 @@ Column {
         text: "PC Monitor"
         onClicked: {
             stackView.pop()
-            stackView.push(pcMonitor)
+            stackView.push(monitorView)
         }
     }
     Button {
