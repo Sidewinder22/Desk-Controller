@@ -3,12 +3,14 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 Pane {
+    visible: false
+
     ColumnLayout {
         anchors.fill: parent
         spacing: 20
 
         Label {
-            text: "Main View"
+            text: "Monitor View"
 
             elide: Label.ElideRight
             Layout.alignment: Qt.AlignHCenter
@@ -18,43 +20,49 @@ Pane {
         }
 
         RowLayout {
-            spacing: 40
+            spacing: 10
             Layout.fillWidth: true
 
-            MonitorStatusWidget {
+            PCMonitorWidget {
                 id: pcMonitorWidget
-                title: "PC Monitor"
             }
 
-            MonitorStatusWidget {
+            RpiMonitorWidget {
                 id: rpiMonitorWidget
-                title: "Rpi 4 Monitor"
             }
         }
 
         Connections {
             target: backend
 
+            function onPcMonitorDataReceivedNotif(loadData) {
+                pcMonitorWidget.loadData = loadData
+            }
+
             function onPcMonitorConnectedNotif(ipAddress, hostname) {
-                pcMonitorWidget.connected = true
                 pcMonitorWidget.ipAddress = ipAddress
                 pcMonitorWidget.hostname = hostname
             }
 
             function onPcMonitorDisconnectedNotif() {
-                pcMonitorWidget.connected = false
+                console.log("MainView, pc monitor disconnected")
+                pcMonitorWidget.loadData = ""
                 pcMonitorWidget.ipAddress = ""
                 pcMonitorWidget.hostname = ""
             }
 
+            function onRpiMonitorDataReceivedNotif(loadData) {
+                rpiMonitorWidget.loadData = loadData
+            }
+
             function onRpiMonitorConnectedNotif(ipAddress, hostname) {
-                rpiMonitorWidget.connected = true
                 rpiMonitorWidget.ipAddress = ipAddress
                 rpiMonitorWidget.hostname = hostname
             }
 
             function onRpiMonitorDisconnectedNotif() {
-                rpiMonitorWidget.connected = false
+                console.log("MainView, rpi monitor disconnected")
+                rpiMonitorWidget.loadData = ""
                 rpiMonitorWidget.ipAddress = ""
                 rpiMonitorWidget.hostname = ""
             }

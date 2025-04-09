@@ -5,16 +5,11 @@ import DeskController
 
 ColumnLayout {
 
-    Action {
-        id: connectAction
-        text: qsTr("Connect")
-        onTriggered: connectDialog.open()
-    }
-
     MenuBar {
         Menu {
             title: qsTr("&File")
-            MenuItem { action: connectAction }
+
+            Action { text: qsTr("&New...") }
 
             MenuSeparator { }
 
@@ -43,11 +38,6 @@ ColumnLayout {
                 text: qsTr("<")
                 enabled: stackView.depth > 1
                 onClicked: stackView.pop()
-            }
-
-            ToolButton {
-                text: qsTr("Connect")
-                action: connectAction
             }
 
             Label {

@@ -6,12 +6,12 @@ qt_add_qml_module(DeskControllerContent
     QML_FILES
         App.qml
         Bars.qml
-        ConnectDialog.qml
         Footer.qml
         HomePage.qml
         MainView.qml
-        PCMonitor.qml
+        MonitorView.qml
         PCMonitorWidget.qml
+        MonitorStatusWidget.qml
         RoomMonitor.qml
         RpiMonitorWidget.qml
         SideBar.qml
