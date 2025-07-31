@@ -8,8 +8,8 @@ Rectangle {
     property string ipAddress;
     property string title;
 
-    width: 400
-    height: 200
+    width: 350
+    height: 300
     color: connected ? "#e6ffe6" : "#ffb3b3"
 
     border.color: connected ? "#00cc00" : "#ff4d4d"

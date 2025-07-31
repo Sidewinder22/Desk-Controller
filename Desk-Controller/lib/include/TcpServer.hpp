@@ -41,7 +41,7 @@ private:
     QScopedPointer<RpiMonitor> rpiMonitor_;
     quint16 port_;
 
-    static constexpr std::string_view pcHostname = "F-22 Raptor";
+    static constexpr std::string_view pcHostname = "Raptor";
     static constexpr std::string_view rpiHostname = "Raspberry Pi 4";
 };
 
