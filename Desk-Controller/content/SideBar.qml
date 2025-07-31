@@ -11,6 +11,7 @@ Column {
 
     Button {
         text: "Main View"
+        width: 90
 
         onClicked: {
             if (stackView.depth > 1) {
@@ -20,6 +21,8 @@ Column {
     }
     Button {
         text: "PC Monitor"
+        width: 90
+
         onClicked: {
             stackView.pop()
             stackView.push(monitorView)
@@ -27,6 +30,8 @@ Column {
     }
     Button {
         text: "Third"
+        width: 90
+
         onClicked: {
             stackView.pop()
             stackView.push(roomMonitor)

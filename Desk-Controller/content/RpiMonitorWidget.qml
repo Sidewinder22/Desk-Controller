@@ -8,8 +8,8 @@ Rectangle {
     property string hostname;
     property string ipAddress;
 
-    width: 600
-    height: 700
+    width: 570
+    height: 720
     color: "#f2e6ff"
 
     border.color: "#6600cc"

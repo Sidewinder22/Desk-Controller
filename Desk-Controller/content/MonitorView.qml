@@ -20,7 +20,7 @@ Pane {
         }
 
         RowLayout {
-            spacing: 10
+            spacing: 20
             Layout.fillWidth: true
 
             PCMonitorWidget {

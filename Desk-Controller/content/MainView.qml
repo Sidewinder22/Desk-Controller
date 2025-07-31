@@ -18,7 +18,7 @@ Pane {
         }
 
         RowLayout {
-            spacing: 40
+            spacing: 20
             Layout.fillWidth: true
 
             MonitorStatusWidget {
@@ -26,10 +26,16 @@ Pane {
                 title: "PC Monitor"
             }
 
-            MonitorStatusWidget {
+           MonitorStatusWidget {
                 id: rpiMonitorWidget
                 title: "Rpi 4 Monitor"
             }
+
+           MonitorStatusWidget {
+                id: androidMonitorWidget
+                title: "S25 Ultra Monitor"
+            }
+
         }
 
         Connections {
