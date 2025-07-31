@@ -1,4 +1,4 @@
-find_package(Qt6 6.5 REQUIRED COMPONENTS Core)
+find_package(Qt6 6.4 REQUIRED COMPONENTS Core)
 
 set(LIB backend)
 

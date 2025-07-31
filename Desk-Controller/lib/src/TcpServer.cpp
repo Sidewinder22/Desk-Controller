@@ -1,5 +1,4 @@
 #include <iostream>
-#include <print>
 #include <source_location>
 #include "TcpServer.hpp"
 
@@ -60,7 +59,7 @@ void TcpServer::newConnection()
     auto hostname = socket->readAll().trimmed();
     std::cout << "Hostname: " << hostname.toStdString() << "." << std::endl;
 
-    if (hostname == pcHostname)
+    if (hostname.toStdString() == pcHostname)
     {
         std::cout << sl::current().function_name() << hostname.toStdString() << " connected" << std::endl;
 
@@ -72,7 +71,7 @@ void TcpServer::newConnection()
 
         emit pcMonitorConnectedNotif(ipAddres, hostname);
     }
-    else if (hostname == rpiHostname)
+    else if (hostname.toStdString() == rpiHostname)
     {
         std::cout << sl::current().function_name() << hostname.toStdString() << " connected" << std::endl;
 
