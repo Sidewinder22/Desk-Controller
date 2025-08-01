@@ -5,13 +5,13 @@ qt_add_qml_module(DeskControllerApp
     QML_FILES Main.qml
 )
 
+add_subdirectory(common)
 add_subdirectory(content)
-add_subdirectory(imports)
 
 target_link_libraries(DeskControllerApp PRIVATE
+    Common
+    Commonplugin
     Content
     Contentplugin
-    Imports
-    Importsplugin
     backend
 )
