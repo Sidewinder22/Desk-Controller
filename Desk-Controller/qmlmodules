@@ -9,8 +9,9 @@ add_subdirectory(content)
 add_subdirectory(imports)
 
 target_link_libraries(DeskControllerApp PRIVATE
-    DeskControllerContent
-    DeskControllerContentplugin
-    DeskControllerplugin
+    Content
+    Contentplugin
+    Imports
+    Importsplugin
     backend
 )
