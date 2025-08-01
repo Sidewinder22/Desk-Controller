@@ -1,6 +1,6 @@
-qt_add_library(DeskControllerContent STATIC)
+qt_add_library(Content STATIC)
 
-qt_add_qml_module(DeskControllerContent
+qt_add_qml_module(Content
     URI "content"
     VERSION 1.0
     QML_FILES
