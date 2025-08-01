@@ -8,10 +8,10 @@ set_source_files_properties(AppSettings.qml
         QT_QML_SINGLETON_TYPE true
 )
 
-qt_add_library(Imports STATIC)
+qt_add_library(Common STATIC)
 
-qt_add_qml_module(Imports
-    URI "DeskController"
+qt_add_qml_module(Common
+    URI "common"
     VERSION 1.0
     QML_FILES
         AppSettings.qml

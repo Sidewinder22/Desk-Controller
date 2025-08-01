@@ -1,4 +1,4 @@
 #include <QtQml/qqmlextensionplugin.h>
 
 Q_IMPORT_QML_PLUGIN(contentPlugin)
-Q_IMPORT_QML_PLUGIN(DeskControllerPlugin)
+Q_IMPORT_QML_PLUGIN(commonPlugin)

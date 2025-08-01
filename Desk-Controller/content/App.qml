@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Controls
-import DeskController
+import common
 
 Window {
     id: window
